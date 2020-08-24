@@ -1,6 +1,8 @@
 .PHONY: docs
 docs:
-	mkdir -p docs
+	rm -rf docs
+	mkdir -p docs/assets
+	cp -r ../blog/assets/i18n docs/assets/i18n
 	# Ensure submodules are present
 	git submodule update --init --recursive
 	# Build pages
