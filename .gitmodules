@@ -1,0 +1,3 @@
+[submodule "tool/ini"]
+	path = tool/ini
+	url = git@github.com:finwo/ini-tools
