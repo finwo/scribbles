@@ -9,7 +9,7 @@ declare -A TOKENS
 while IFS='=' read key value; do
   [ ! -z "$key" ] || continue
   TOKENS["$key"]="$value"
-done <<< "$(tool/ini/ini.sh ${PAGEDIR}/meta.ini)"
+done <<< "$(tool/ini.sh ${PAGEDIR}/meta.ini)"
 
 if [ ! -d "$PAGEDIR" ]; then
   exit 0
@@ -18,7 +18,7 @@ shift
 
 # Handle indexes
 while [ "$#" -gt 0 ]; do
-  tool/ini/template.sh -c config.ini -c "${PAGEDIR}/meta.ini" -p partials "${1}" >> "${2}"
+  tool/template.sh -c config.ini -c "${PAGEDIR}/meta.ini" -p partials "${1}" >> "${2}"
   shift 2
 done
 
@@ -41,7 +41,7 @@ if [ -f "${PAGEDIR}/content.md" ]; then
 fi
 
 mkdir -p "docs/${TOKENS[page.id]}"
-tool/ini/template.sh -c config.ini -c "${PAGEDIR}/meta.ini" -p partials "${PAGEDIR}/content.hbs" > "docs/${TOKENS[page.id]}/index.html"
+tool/template.sh -c config.ini -c "${PAGEDIR}/meta.ini" -p partials "${PAGEDIR}/content.hbs" > "docs/${TOKENS[page.id]}/index.html"
 
 # Handle extra build steps
 if [ -f "${PAGEDIR}/extra.sh" ]; then
